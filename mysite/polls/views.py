@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.views import generic
 from django.http import HttpResponse
 from django.template import loader
-from .models import Question, Choice
+from .models import *
 from django.utils import timezone
 
 
@@ -14,6 +14,11 @@ def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
+
+#Vista con los campos para el form del admin
+def admnform(request, form_id):
+    form = get_object_or_404(adminForm, pk=form_id)
+    return render(request, 'polls/admnform.html', {'form': form})
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -40,6 +45,7 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'

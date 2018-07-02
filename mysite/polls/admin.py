@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Choice, Question
+from .models import *
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -15,3 +15,11 @@ class ChoiceInline(admin.TabularInline):
     extra = 3
 
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(adminForm)
+admin.site.register(adminSChoice)
+admin.site.register(sChoices)
+admin.site.register(adminMChoice)
+admin.site.register(mChoices)
+admin.site.register(adminTextF)
+admin.site.register(adminTextA)
+admin.site.register(adminBool)

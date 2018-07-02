@@ -1,0 +1,39 @@
+<h1>{{ form.name }}</h1>
+
+
+<form action="" method="post">
+{% csrf_token %}
+	{% for b in form.adminbool_set.all %}
+	    <input type="checkbox" name="{{b.name}}" id="placeholder" value="{{ b.boolean }}" />
+	    <label>{{ b.name }}</label><br />
+	{% endfor %}
+	{% for ta in form.admintexta_set.all %}
+	    <label>{{ ta.label }}</label>
+	    <textarea name="{{ta.name}}" id="placeholder" value="{{ ta.txt }}"></textarea><br />
+	{% endfor %}
+	{% for tf in form.admintextf_set.all %}
+	    <label>{{ tf.name }}</label>
+	    <input type="text" name="{{tf.name}}" id="placeholder" value="{{ tf.txt }}" /><br />
+	{% endfor %}
+	{% for sc in form.adminschoice_set.all %}
+		{% for c in sc.schoices_set.all %}
+	    	<input type="radio" name = "{{sc.name}}" />
+	    	<label>{{ c.choice_text }}</label><br />
+		{% endfor %}
+		{% if sc.other %}
+	    	<label>Otro:</label>
+	    	<input type="text" id="placeholder" /><br />
+		{% endif %}
+	{% endfor %}
+	{% for mc in form.adminmchoice_set.all %}
+		{% for c in mc.mchoices_set.all %}
+	    	<input type="checkbox" name = "{{mc.name}}" />
+	    	<label>{{ c.choice_text }}</label><br />
+		{% endfor %}
+		{% if mc.other %}
+	    	<label>Otro:</label>
+	    	<input type="text" id="placeholder" /><br />
+		{% endif %}
+	{% endfor %}
+<input type="submit" value="Vote" />
+</form>
